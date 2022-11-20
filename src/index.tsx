@@ -7,6 +7,7 @@ import '~i18n'
 import { BottomSheetModalProvider } from '@gorhom/bottom-sheet'
 import { registerRootComponent } from 'expo'
 import { QueryClientProvider, QueryClient } from 'react-query'
+import { ThemeProvider } from 'styled-components/native'
 
 import { AppLoading } from '~components'
 import { Navigation } from '~navigation'
@@ -14,6 +15,7 @@ import { AuthProvider, SafeAreaProvider } from '~providers'
 import { ColorSchemeProvider } from '~providers/ColorSchemeProvider'
 import { startMockedServer } from '~services'
 import { LocalProviderProvider } from '~providers/LocalProvider'
+import theme from '~styles/theme'
 
 // FIXME: there is some issue with miragejs that causes console.log to not work
 const DISABLE_CONSOLE_ENABLE_MOCKED_SERVER = false
@@ -26,21 +28,23 @@ const queryClient = new QueryClient({})
 
 const App = (): JSX.Element => {
   return (
-    <SafeAreaProvider>
-      <QueryClientProvider client={queryClient}>
-        <AuthProvider>
-          <LocalProviderProvider>
-            <AppLoading>
-              <ColorSchemeProvider>
-                <BottomSheetModalProvider>
-                  <Navigation />
-                </BottomSheetModalProvider>
-              </ColorSchemeProvider>
-            </AppLoading>
-          </LocalProviderProvider>
-        </AuthProvider>
-      </QueryClientProvider>
-    </SafeAreaProvider>
+    <ThemeProvider theme={theme}>
+      <SafeAreaProvider>
+        <QueryClientProvider client={queryClient}>
+          <AuthProvider>
+            <LocalProviderProvider>
+              <AppLoading>
+                <ColorSchemeProvider>
+                  <BottomSheetModalProvider>
+                    <Navigation />
+                  </BottomSheetModalProvider>
+                </ColorSchemeProvider>
+              </AppLoading>
+            </LocalProviderProvider>
+          </AuthProvider>
+        </QueryClientProvider>
+      </SafeAreaProvider>
+    </ThemeProvider>
   )
 }
 

@@ -1,0 +1,78 @@
+import { RFValue } from 'react-native-responsive-fontsize'
+
+export default {
+  colors: {
+    primary: '#00349a',
+    secondary: '#000',
+    background_global: '#f1f1f1',
+  },
+  toast: {
+    secondary_light: '#ff872c4d',
+    success: '#12A454',
+    success_light: '#12a45480',
+    attention: '#E83F5B',
+    attention_light: '#e83f5b80',
+  },
+  fonts: {
+    thin: 'Roboto_100Thin',
+    regular: 'Roboto_400Regular',
+    regular_italic: 'Roboto_400Regular_Italic',
+    medium: 'Roboto_500Medium',
+    bold: 'Roboto_700Bold',
+    black: 'Roboto_900Black',
+  },
+  fontSizes: {
+    small: RFValue(10),
+    smalls: RFValue(13),
+    medium: RFValue(14),
+    large: RFValue(16),
+    xlarge: RFValue(18),
+    xxlarge: RFValue(20),
+    xxxlarge: RFValue(22),
+    xslarge: RFValue(24),
+    xsslarge: RFValue(26),
+    xssslarge: RFValue(28),
+    extralarge: RFValue(50),
+  },
+  borderRadius: {
+    small: RFValue(4),
+    medium: RFValue(8),
+    large: RFValue(12),
+    xlarge: RFValue(16),
+    xxlarge: RFValue(20),
+    xxxlarge: RFValue(24),
+  },
+  borderWidth: {
+    small: RFValue(1),
+    medium: RFValue(2),
+    large: RFValue(3),
+    xlarge: RFValue(4),
+    xxlarge: RFValue(5),
+    xxxlarge: RFValue(6),
+  },
+  spacing: {
+    small: RFValue(4),
+    medium: RFValue(8),
+    large: RFValue(12),
+    xlarge: RFValue(16),
+    xxlarge: RFValue(20),
+    xxxlarge: RFValue(24),
+    xslarge: RFValue(28),
+    xsslarge: RFValue(32),
+  },
+  radius: {
+    small: RFValue(4),
+    medium: RFValue(8),
+    large: RFValue(12),
+
+    xlarge: RFValue(16),
+    xxlarge: RFValue(20),
+    xxxlarge: RFValue(24),
+  },
+  shadows: {
+    small: '0px 8px 16px rgba(0,0,0,0.1)',
+    medium: '0px 8px 16px rgba(0,0,0,0.2)',
+    large: '0px 8px 16px rgba(0,0,0,0.3)',
+    xlarge: '0px 8px 16px rgba(0,0,0,0.4)',
+  },
+}

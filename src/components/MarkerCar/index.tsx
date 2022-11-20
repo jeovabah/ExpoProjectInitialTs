@@ -5,15 +5,17 @@ import car from '../../../assets/car.png'
 interface Props {
   latitude: number
   longitude: number
+  onPress?: () => void
 }
 
-export const MarkerCar = ({ latitude, longitude }: Props) => {
+export const MarkerCar = ({ latitude, longitude, onPress }: Props) => {
   return (
     <Marker
       coordinate={{
         latitude: latitude,
         longitude: longitude,
       }}
+      onPress={onPress}
     >
       <Image
         source={car}

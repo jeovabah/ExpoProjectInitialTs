@@ -4,7 +4,7 @@ import { Pressable, Text, PressableProps, StyleSheet, ViewStyle } from 'react-na
 import { useTheme, useCallback } from '~hooks'
 
 type ButtonProps = PressableProps & {
-  title: string
+  title: any
   style?: ViewStyle
 }
 
@@ -13,7 +13,7 @@ export const Button: FC<ButtonProps> = ({ children, style, title, ...props }) =>
 
   // TODO: Think about better solution for cases like this
   const styleFunction = useCallback(
-    ({ pressed }) =>
+    ({ pressed }: any) =>
       StyleSheet.compose(
         [
           pressed ? s.opacity60 : s.opacity100,
