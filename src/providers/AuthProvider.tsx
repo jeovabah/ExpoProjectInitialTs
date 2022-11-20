@@ -6,7 +6,7 @@ import { AuthContext } from '~contexts'
 // TODO: move to constants
 const TOKEN_KEY = 'token'
 
-export const AuthProvider: FC = ({ children }) => {
+export const AuthProvider: FC = ({ children }: any) => {
   const [isSignedIn, setIsSignedIn] = useState<boolean | null>(null)
 
   useEffect(() => {

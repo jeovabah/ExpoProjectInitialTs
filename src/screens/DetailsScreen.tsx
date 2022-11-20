@@ -27,7 +27,7 @@ export const DetailsScreen = (props: DetailsScreenProps): JSX.Element => {
   }, [])
 
   const renderBackdrop = useCallback(
-    (props) => <BottomSheetBackdrop {...props} disappearsOnIndex={-1} appearsOnIndex={0} />,
+    (props: any) => <BottomSheetBackdrop {...props} disappearsOnIndex={-1} appearsOnIndex={0} />,
     []
   )
 

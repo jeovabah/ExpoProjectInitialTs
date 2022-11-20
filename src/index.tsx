@@ -13,6 +13,7 @@ import { Navigation } from '~navigation'
 import { AuthProvider, SafeAreaProvider } from '~providers'
 import { ColorSchemeProvider } from '~providers/ColorSchemeProvider'
 import { startMockedServer } from '~services'
+import { LocalProviderProvider } from '~providers/LocalProvider'
 
 // FIXME: there is some issue with miragejs that causes console.log to not work
 const DISABLE_CONSOLE_ENABLE_MOCKED_SERVER = false
@@ -28,13 +29,15 @@ const App = (): JSX.Element => {
     <SafeAreaProvider>
       <QueryClientProvider client={queryClient}>
         <AuthProvider>
-          <AppLoading>
-            <ColorSchemeProvider>
-              <BottomSheetModalProvider>
-                <Navigation />
-              </BottomSheetModalProvider>
-            </ColorSchemeProvider>
-          </AppLoading>
+          <LocalProviderProvider>
+            <AppLoading>
+              <ColorSchemeProvider>
+                <BottomSheetModalProvider>
+                  <Navigation />
+                </BottomSheetModalProvider>
+              </ColorSchemeProvider>
+            </AppLoading>
+          </LocalProviderProvider>
         </AuthProvider>
       </QueryClientProvider>
     </SafeAreaProvider>
