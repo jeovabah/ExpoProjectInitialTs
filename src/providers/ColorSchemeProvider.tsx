@@ -11,7 +11,7 @@ export type ColorSchemeName = Exclude<SettingColorSchemeName, 'system'>
 
 const defaultColorScheme = colorSchemes.LIGHT
 
-export const ColorSchemeProvider: FC = ({ children }: any) => {
+export const ColorSchemeProvider = ({ children }: any) => {
   const { setItem, getItem } = useAsyncStorage(ASYNC_STORAGE_KEYS.COLOR_SCHEME)
   const systemColorScheme = useRNColorScheme()
   const [colorSchemeSetting, setColorSchemeSetting] = useState<SettingColorSchemeName>(

@@ -1,13 +1,15 @@
-import { MaterialIcons } from '@expo/vector-icons'
-import { BottomSheetModal } from '@gorhom/bottom-sheet'
+import { AntDesign, MaterialIcons } from '@expo/vector-icons'
+import { Ionicons } from '@expo/vector-icons'
+
 import MapView, { PROVIDER_GOOGLE } from 'react-native-maps'
-import { Button } from '~components'
+import { FloatButton } from '~components/FloatButton'
 import { MarkerCar } from '~components/MarkerCar'
+import { ModalAdd } from '~components/ModalAdd'
 import { ModalArrastable } from '~components/ModalArrastable'
 import { useCallback, useTranslation, useTheme, useEffect, useState, useRef } from '~hooks'
 import { useLocalProvider } from '~providers/LocalProvider'
 import theme from '~styles/theme'
-import { Container, MyLocation } from './styles'
+import { Container, ContainerButtonFloat, MyLocation } from './styles'
 export const HomeScreen = (props: HomeScreenProps): JSX.Element => {
   const {
     navigation: { navigate },
@@ -15,11 +17,17 @@ export const HomeScreen = (props: HomeScreenProps): JSX.Element => {
   const { location } = useLocalProvider()
   const mapRef = useRef<any>(null)
   const [visible, setVisible] = useState(false)
+  const [carSelected, setCarSelected] = useState<any>(null)
+  const [modalConfig, setModalConfig] = useState<boolean>(false)
+  const [modalAdd, setModalAdd] = useState<boolean>(false)
 
-  const openModal = useCallback(() => {
-    setVisible(true)
-    console.log('openModal')
-  }, [visible])
+  const openModal = useCallback(
+    (item: any) => {
+      setVisible(true)
+      setCarSelected(item)
+    },
+    [visible]
+  )
 
   const fakeDataLocationSocket = [
     {
@@ -52,7 +60,7 @@ export const HomeScreen = (props: HomeScreenProps): JSX.Element => {
       latitudeDelta: 0.01422,
       longitudeDelta: 0.01422,
     })
-  }, [location])
+  }, [location, mapRef.current])
 
   return (
     <Container>
@@ -63,6 +71,9 @@ export const HomeScreen = (props: HomeScreenProps): JSX.Element => {
           style={{
             height: '100%',
             width: '100%',
+          }}
+          onPress={() => {
+            setModalAdd(false)
           }}
           region={{
             latitude: location?.coords?.latitude,
@@ -76,7 +87,7 @@ export const HomeScreen = (props: HomeScreenProps): JSX.Element => {
             fakeDataLocationSocket.map((item) => {
               return (
                 <MarkerCar
-                  onPress={openModal}
+                  onPress={() => openModal(item)}
                   key={item.id}
                   latitude={item.latitude}
                   longitude={item.longitude}
@@ -85,11 +96,25 @@ export const HomeScreen = (props: HomeScreenProps): JSX.Element => {
             })}
         </MapView>
       )}
+
+      <ContainerButtonFloat>
+        <FloatButton
+          onPress={() => setModalAdd(true)}
+          icon={<Ionicons name="settings" size={24} color={theme.colors.secondary} />}
+        />
+        <FloatButton icon={<Ionicons name="add" size={24} color={theme.colors.secondary} />} />
+        <FloatButton
+          icon={<AntDesign name="arrowsalt" size={24} color={theme.colors.secondary} />}
+        />
+        <FloatButton icon={<Ionicons name="search" size={24} color={theme.colors.secondary} />} />
+      </ContainerButtonFloat>
+
       <MyLocation onPress={handleMyLocation} activeOpacity={0.8}>
         <MaterialIcons name="my-location" size={24} color={theme.colors.secondary} />
       </MyLocation>
       {/* pass ref to component ModalArrastable */}
-      <ModalArrastable visible={visible} />
+      <ModalArrastable data={carSelected} visible={visible} setVisible={setVisible} />
+      <ModalAdd visible={modalAdd} />
     </Container>
   )
 }

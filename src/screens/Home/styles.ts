@@ -6,8 +6,16 @@ export const Container = styled.View`
   align-items: center;
   width: 100%;
   height: 100%;
-  position: absolute;
+  position: relative;
 `
+export const ContainerButtonFloat = styled.View`
+  position: absolute;
+
+  flex-direction: column;
+  top: 20px;
+  left: 10px;
+`
+
 export const MyLocation = styled.TouchableOpacity`
   position: absolute;
   bottom: 20px;

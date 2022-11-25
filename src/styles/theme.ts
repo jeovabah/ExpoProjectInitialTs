@@ -4,7 +4,7 @@ export default {
   colors: {
     primary: '#00349a',
     secondary: '#000',
-    background_global: '#f1f1f1',
+    background_global: '#fff',
   },
   toast: {
     secondary_light: '#ff872c4d',
@@ -52,7 +52,7 @@ export default {
   },
   spacing: {
     small: RFValue(4),
-    medium: RFValue(8),
+    medium: RFValue(10),
     large: RFValue(12),
     xlarge: RFValue(16),
     xxlarge: RFValue(20),

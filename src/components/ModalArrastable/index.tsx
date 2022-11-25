@@ -8,16 +8,22 @@ import { Container, ContainerModal } from './styles'
 
 interface Props {
   visible: boolean
+  setVisible?: any
+  data?: any
 }
 
-export const ModalArrastable = ({ visible }: Props) => {
+export const ModalArrastable = ({ visible, setVisible, data }: Props) => {
   const snapPoints = useMemo(() => ['25%', '50%'], [])
   const handleSheetChanges = useCallback((index: number) => {
     console.log('handleSheetChanges', index)
   }, [])
 
   const renderBackdrop = useCallback(
-    (props: any) => <BottomSheetBackdrop {...props} disappearsOnIndex={-1} appearsOnIndex={0} />,
+    (props: any) => {
+      setVisible(false)
+      return <BottomSheetBackdrop {...props} disappearsOnIndex={-1} appearsOnIndex={0} />
+    },
+
     []
   )
 
@@ -25,16 +31,11 @@ export const ModalArrastable = ({ visible }: Props) => {
 
   const openModal = useCallback(() => {
     bottomSheetModalRef.current?.present()
-  }, [])
+  }, [bottomSheetModalRef.current, visible])
 
   if (visible) {
-    console.log('entrando aqui')
     openModal()
   }
-
-  useEffect(() => {
-    console.log('visible', visible)
-  }, [visible])
 
   return (
     <Container>
@@ -46,7 +47,7 @@ export const ModalArrastable = ({ visible }: Props) => {
         backdropComponent={renderBackdrop}
       >
         <ContainerModal>
-          <Text>Awesome 🎉</Text>
+          <Text>{data?.name}</Text>
         </ContainerModal>
       </BottomSheetModal>
     </Container>

@@ -1,0 +1,13 @@
+import { ButtonFloatContainer } from './styles'
+import theme from '~styles/theme'
+interface Props {
+  onPress?: () => void
+  icon?: JSX.Element
+}
+export const FloatButton = ({ icon, onPress }: Props) => {
+  return (
+    <ButtonFloatContainer activeOpacity={0.7} onPress={onPress}>
+      {icon}
+    </ButtonFloatContainer>
+  )
+}

@@ -5,7 +5,7 @@ import { useAuth, useCachedResources } from '~hooks'
 
 SplashScreen.preventAutoHideAsync()
 
-export const AppLoading: FC = ({ children }: any) => {
+export const AppLoading = ({ children }: any) => {
   const isLoadingComplete = useCachedResources()
   const { isSignedIn } = useAuth()
 

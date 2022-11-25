@@ -1,0 +1,18 @@
+import styled from 'styled-components/native'
+
+interface InputProps {
+  m?: string
+  flex?: boolean
+  w?: string
+}
+
+export const TextInput = styled.TextInput<InputProps>`
+  border-radius: ${({ theme }) => theme.borderRadius.small}px;
+  border-width: ${({ theme }) => theme.borderWidth.small}px;
+  border-color: ${({ theme }) => theme.colors.primary};
+  padding: ${({ theme }) => theme.spacing.small}px;
+  font-size: ${({ theme }) => theme.fontSizes.medium}px;
+  flex: ${({ flex }) => (flex ? 1 : 0)};
+  width: ${({ w }) => w ?? '0'};
+  margin: ${({ m }) => m ?? 0};
+`
