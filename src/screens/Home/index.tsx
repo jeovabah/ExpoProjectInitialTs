@@ -8,6 +8,7 @@ import { ModalAdd } from '~components/ModalAdd'
 import { ModalArrastable } from '~components/ModalArrastable'
 import { useCallback, useTranslation, useTheme, useEffect, useState, useRef } from '~hooks'
 import { useLocalProvider } from '~providers/LocalProvider'
+import AppSocket from '~services/socket'
 import theme from '~styles/theme'
 import { Container, ContainerButtonFloat, MyLocation } from './styles'
 export const HomeScreen = (props: HomeScreenProps): JSX.Element => {
@@ -16,11 +17,11 @@ export const HomeScreen = (props: HomeScreenProps): JSX.Element => {
   } = props
   const { location } = useLocalProvider()
   const mapRef = useRef<any>(null)
+  const socketTracker = useRef<any>(null)
   const [visible, setVisible] = useState(false)
   const [carSelected, setCarSelected] = useState<any>(null)
   const [modalConfig, setModalConfig] = useState<boolean>(false)
   const [modalAdd, setModalAdd] = useState<boolean>(false)
-
   const openModal = useCallback(
     (item: any) => {
       setVisible(true)
@@ -51,7 +52,51 @@ export const HomeScreen = (props: HomeScreenProps): JSX.Element => {
       name: 'Car 3',
       image: 'https://i.imgur.com/8Km9tLL.jpg',
     },
+    {
+      id: 4,
+      latitude: -3.731852,
+      longitude: -38.525624,
+      name: 'Car 4',
+      image: 'https://i.imgur.com/8Km9tLL.jpg',
+    },
+    {
+      id: 5,
+      latitude: -3.731862,
+      longitude: -38.526624,
+      name: 'Car 5',
+      image: 'https://i.imgur.com/8Km9tLL.jpg',
+    },
+    {
+      id: 6,
+      latitude: -3.731872,
+      longitude: -38.527624,
+      name: 'Car 6',
+      image: 'https://i.imgur.com/8Km9tLL.jpg',
+    },
+    {
+      id: 7,
+      latitude: -3.731882,
+      longitude: -38.528624,
+      name: 'Car 7',
+      image: 'https://i.imgur.com/8Km9tLL.jpg',
+    },
+    {
+      id: 8,
+      latitude: -3.731892,
+      longitude: -38.529624,
+      name: 'Car 8',
+      image: 'https://i.imgur.com/8Km9tLL.jpg',
+    },
   ]
+
+  useEffect(() => {
+    async function openSocket(idTracker: number) {
+      socketTracker.current = new AppSocket()
+      socketTracker.current.onEvent(`trackerPerId_${idTracker}`)
+    }
+
+    openSocket(1234)
+  }, [])
 
   const handleMyLocation = useCallback(() => {
     mapRef.current.animateToRegion({
@@ -114,7 +159,7 @@ export const HomeScreen = (props: HomeScreenProps): JSX.Element => {
       </MyLocation>
       {/* pass ref to component ModalArrastable */}
       <ModalArrastable data={carSelected} visible={visible} setVisible={setVisible} />
-      <ModalAdd visible={modalAdd} />
+      <ModalAdd visible={modalAdd} data={fakeDataLocationSocket} />
     </Container>
   )
 }

@@ -3,21 +3,36 @@ import styled from 'styled-components/native'
 export const Container = styled.View`
   background-color: red;
   z-index: 1;
-  position: relative;
+  position: absolute;
   bottom: 0;
+  max-height: 400px;
   width: 100%;
-  height: 90%;
   border-top-left-radius: ${({ theme }) => theme.spacing.medium}px;
   border-top-right-radius: ${({ theme }) => theme.spacing.medium}px;
   background-color: ${({ theme }) => theme.colors.background_global};
   padding: ${({ theme }) => theme.spacing.medium}px;
+  align-items: center;
 `
 
 export const ContainerInputs = styled.View`
   flex-direction: row;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-end;
   margin: 5px;
+`
+
+export const ContainerInput = styled.View`
+  width: 20%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`
+export const ContainerInputName = styled.View`
+  width: 50%;
+  margin: 0px 10px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `
 
 export const ButtonAdd = styled.TouchableOpacity`
@@ -30,10 +45,24 @@ export const ButtonAdd = styled.TouchableOpacity`
 `
 
 export const InputId = styled.TextInput`
-  width: 20%;
+  width: 100%;
   border-radius: ${({ theme }) => theme.borderRadius.small}px;
   border-width: ${({ theme }) => theme.borderWidth.small}px;
   border-color: ${({ theme }) => theme.colors.primary};
   padding: ${({ theme }) => theme.spacing.small}px;
   font-size: ${({ theme }) => theme.fontSizes.medium}px;
+`
+
+export const ListUsers = styled.FlatList`
+  width: 100%;
+`
+
+export const ContainerList = styled.View`
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin: 5px;
+
+  border-bottom-width: ${({ theme }) => theme.borderWidth.small}px;
+  border-bottom-color: ${({ theme }) => theme.colors.primary};
 `
