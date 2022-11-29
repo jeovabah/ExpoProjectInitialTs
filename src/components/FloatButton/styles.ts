@@ -3,7 +3,7 @@ import styled from 'styled-components/native'
 export const ButtonFloatContainer = styled.TouchableOpacity`
   width: 50px;
   height: 50px;
-  border-radius: 100%;
+  border-radius: 100px;
 
   margin-bottom: 10px;
 

@@ -22,7 +22,7 @@ export const MyLocation = styled.TouchableOpacity`
   right: 20px;
   width: 50px;
   height: 50px;
-  border-radius: 100%;
+  border-radius: 100px;
   background-color: ${({ theme }) => theme.colors.primary};
   justify-content: center;
   align-items: center;
