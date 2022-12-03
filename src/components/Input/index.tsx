@@ -5,18 +5,16 @@ interface Props {
   value?: string
   setChange?: any
   m?: string
-  flex?: boolean
   w?: string
 }
 
-export const Input = ({ setChange, value, placeholder, m, flex, w }: Props) => {
+export const Input = ({ setChange, value, placeholder, m, w }: Props) => {
   return (
     <TextInput
       placeholder={placeholder}
       value={value}
       m={m}
       w={w}
-      flex={flex}
       onChangeText={(e) => setChange(e)}
     />
   )

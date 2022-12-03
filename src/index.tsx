@@ -2,7 +2,6 @@
 // import './wdyr'
 import 'react-native-gesture-handler'
 import 'react-native-reanimated'
-import '~i18n'
 
 import { BottomSheetModalProvider } from '@gorhom/bottom-sheet'
 import { registerRootComponent } from 'expo'

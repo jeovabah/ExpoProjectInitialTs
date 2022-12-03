@@ -2,13 +2,11 @@
 import * as Application from 'expo-application'
 import { ScrollView, Text } from 'react-native'
 
-import { usePreventGoBack, useTranslation, useTheme } from '~hooks'
+import { usePreventGoBack, useTheme } from '~hooks'
 
 export const ApplicationInfoScreen = (): JSX.Element => {
-  const { i18n } = useTranslation()
   const { s } = useTheme()
   usePreventGoBack()
-
   return (
     <ScrollView contentContainerStyle={[s.flex1, s.justifyStart, s.p4]}>
       <Text style={[s.textPrimary]}>
@@ -18,7 +16,6 @@ export const ApplicationInfoScreen = (): JSX.Element => {
       <Text style={[s.textPrimary]}>{Application.applicationName}</Text>
       <Text style={[s.textPrimary]}>{Application.nativeApplicationVersion}</Text>
       <Text style={[s.textPrimary]}>{Application.nativeBuildVersion}</Text>
-      <Text style={[s.textPrimary]}>{i18n.languages.join(', ')}</Text>
     </ScrollView>
   )
 }

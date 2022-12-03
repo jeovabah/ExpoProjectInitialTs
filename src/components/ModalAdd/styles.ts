@@ -1,6 +1,8 @@
+import { MotiView } from 'moti'
+import { RFValue } from 'react-native-responsive-fontsize'
 import styled from 'styled-components/native'
 
-export const Container = styled.View`
+export const Container = styled(MotiView)`
   background-color: red;
   z-index: 1;
   position: absolute;
@@ -36,7 +38,7 @@ export const ContainerInputName = styled.View`
 `
 
 export const ButtonAdd = styled.TouchableOpacity`
-  height: 35px;
+  height: ${RFValue(35)}px;
   padding: 0 ${({ theme }) => theme.spacing.medium}px;
   align-items: center;
   justify-content: center;

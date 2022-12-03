@@ -25,7 +25,20 @@ export const ModalAdd = ({ visible, setVisible, data, setData }: Props) => {
   return (
     <>
       {visible && (
-        <Container>
+        <Container
+          from={{
+            opacity: 0,
+            transform: [{ translateY: 150 }],
+          }}
+          animate={{
+            opacity: 1,
+            transform: [{ translateY: 0 }],
+          }}
+          exit={{
+            opacity: 0,
+            transform: [{ translateY: 0 }],
+          }}
+        >
           <ContainerInputs>
             <ContainerInput>
               <TextEdit>ID</TextEdit>
@@ -33,7 +46,7 @@ export const ModalAdd = ({ visible, setVisible, data, setData }: Props) => {
             </ContainerInput>
             <ContainerInputName>
               <TextEdit>Nome</TextEdit>
-              <Input m={'0 10px 0 10px'} w={'100%'} flex={true} placeholder="Nome" />
+              <Input m={'0 10px 0 10px'} w={'100%'} placeholder="Nome" />
             </ContainerInputName>
 
             <ButtonAdd>

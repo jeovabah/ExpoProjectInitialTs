@@ -1,6 +1,7 @@
 import { useCallback, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useNavigation } from '@react-navigation/native'
+import { yupResolver } from '@hookform/resolvers/yup'
 import {
   ButtonRedefinePassword,
   ButtonRedefinePasswordText,
@@ -21,19 +22,32 @@ import {
   TermsOfUseButton,
   TermsOfUseText,
 } from './styles'
+import { InputContainer } from '~components/InputContainer'
+import { Input } from '~components/Input2'
+import { InputPassword } from '~components/InputPassword'
+import { Button } from '~components'
+import { If } from '~components/If'
+import { schema } from './schema'
+import { useAuth } from '~hooks'
 
-interface FormData extends TextInputMask {
+interface FormData {
   email: string
   password: string
 }
 
 export default function Login() {
-  const [loading, setLoading] = useState(false)
   const [modalTerms, setModalTerms] = useState(false)
-  const [driverSelected, setDriverSelected] = useState(false)
-  const navigation = useNavigation()
-
-  const handleAuth = useCallback(() => {}, [])
+  const { signIn } = useAuth()
+  const handleAuth = useCallback(() => {
+    signIn()
+  }, [])
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormData>({
+    resolver: yupResolver(schema),
+  })
 
   const handleSignUp = useCallback(() => {}, [])
 
@@ -42,81 +56,54 @@ export default function Login() {
   return (
     <>
       <Container>
-        <If condition={verifyDelivery}>
-          <BackPage onPress={() => navigation.goBack()} text={''} />
-        </If>
         <Content>
-          <ContentImage>
-            <Logo source={logo} />
-          </ContentImage>
+          <ContentImage>{/* <Logo source={logo} /> */}</ContentImage>
 
-          <InputContainer label={translate('login.label_email')}>
+          <InputContainer label={'Insira seu Email'}>
             <Input
               name="email"
               control={control}
               error={errors.email && errors.email.message}
-              placeholder={translate('login.text_placeholder_email')}
+              placeholder={'Email'}
               keyboardType="email-address"
               icon
             />
           </InputContainer>
 
-          <InputContainer label={translate('login.label_password')}>
+          <InputContainer label={'Insira sua senha'}>
             <InputPassword
               name="password"
               control={control}
-              placeholder={translate('login.text_placeholder_password')}
+              placeholder={'Senha'}
               error={errors.password && errors.password.message}
               icon
-              onSubmitEditing={handleSubmit(handleAuth)}
+              // onSubmitEditing={handleSubmit(handleAuth)}
             />
           </InputContainer>
 
           <ContentActions>
-            <CheckBoxCircle
-              title="Sou Parceiro"
-              checked={driverSelected}
-              onCheck={() => setDriverSelected(!driverSelected)}
-            />
-
             <ButtonRedefinePassword activeOpacity={0.8} onPress={() => handleRecoveryPassword()}>
-              <ButtonRedefinePasswordText>
-                {translate('recoveryPassword.title')}
-              </ButtonRedefinePasswordText>
+              <ButtonRedefinePasswordText>Esqueceu sua senha?</ButtonRedefinePasswordText>
             </ButtonRedefinePassword>
           </ContentActions>
 
           <ContentButton>
-            <Button title={translate('login.text_login')} onPress={handleSubmit(handleAuth)} />
+            <Button title={'Entrar'} onPress={handleAuth} />
           </ContentButton>
 
           <If condition>
             <ContentOrSocial>
               <OrSocialTrace />
               <OrSocialText>
-                {''} {translate('login.init_ssesion_social')} {''}
+                {''} Entrar com login social {''}
               </OrSocialText>
               <OrSocialTrace />
             </ContentOrSocial>
-
-            <ContentSocial>
-              <Accessory onPress={() => {}}>
-                <IconGoogle height={RFValue(31)} width={RFValue(31)} />
-              </Accessory>
-
-              <Accessory onPress={() => {}}>
-                <IconFacebook height={RFValue(31)} width={RFValue(31)} />
-              </Accessory>
-
-              <Accessory onPress={() => {}}>
-                <IconApple height={RFValue(31)} width={RFValue(31)} />
-              </Accessory>
-            </ContentSocial>
           </If>
 
           <ButtonRegister activeOpacity={0.5} onPress={() => handleSignUp()}>
-            <ButtonRegisterText>{translate('login.not_account')}</ButtonRegisterText>
-            <ButtonRegisterTextGrif>{translate('login.text_register')}</ButtonRegisterTextGrif>
+            <ButtonRegisterText>Não tem conta?</ButtonRegisterText>
+            <ButtonRegisterTextGrif>Registre-se agora!</ButtonRegisterTextGrif>
           </ButtonRegister>
 
           <ContentTermsOfUse>
@@ -125,9 +112,9 @@ export default function Login() {
             </TermsOfUseButton>
           </ContentTermsOfUse>
         </Content>
-        <Preload visible={loading} />
+        {/* <Preload visible={loading} /> */}
       </Container>
-      <TermsOfUseModal visible={modalTerms} setVisible={setModalTerms} />
+      {/* <TermsOfUseModal visible={modalTerms} setVisible={setModalTerms} /> */}
     </>
   )
 }
