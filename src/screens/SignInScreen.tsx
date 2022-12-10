@@ -1,4 +1,4 @@
-import { TextInput, View } from 'react-native'
+import { Text, TextInput, View } from 'react-native'
 import { VolumeManager } from 'react-native-volume-manager'
 
 import { Button } from '~components'
@@ -30,11 +30,12 @@ export const SignInScreen = (): JSX.Element => {
       console.log(result.volume)
       if (countTakeVolume === 3) {
         console.log('foi pressionado 3 vezes')
-        setCountTakeVolume(0)
       }
+      if (countTakeVolume === 6) {
+        setCountTakeVolume(0)
 
-      // on android, the result object will also have the keys
-      // music, system, ring, alarm, notification
+        console.log('foi pressionado 2 vezes')
+      }
     })
 
     return () => {
@@ -46,6 +47,13 @@ export const SignInScreen = (): JSX.Element => {
   return (
     <View style={[s.flex1, s.justifyCenter, s.itemsCenter]}>
       <Button onPress={signIn} title="Sign in" />
+      <Text
+        style={{
+          color: 'black',
+        }}
+      >
+        {countTakeVolume >= 2 && countTakeVolume !== 6 ? 'foi pressionado 2 vezes' : ''}
+      </Text>
     </View>
   )
 }
