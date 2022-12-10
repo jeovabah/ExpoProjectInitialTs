@@ -112,7 +112,7 @@ export const HomeScreen = (props: HomeScreenProps): JSX.Element => {
       {location && (
         <MapView
           ref={mapRef}
-          provider={PROVIDER_GOOGLE}
+          provider={'google'}
           style={{
             height: '100%',
             width: '100%',

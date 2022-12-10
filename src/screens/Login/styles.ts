@@ -1,3 +1,4 @@
+import { RFValue } from 'react-native-responsive-fontsize'
 import styled from 'styled-components/native'
 
 export const Container = styled.View`
@@ -33,7 +34,6 @@ export const ButtonRedefinePassword = styled.TouchableOpacity``
 
 export const ButtonRedefinePasswordText = styled.Text`
   font-size: ${({ theme }) => theme.fontSizes.medium}px;
-  font-family: ${({ theme }) => theme.fonts.regular};
   color: ${({ theme }) => theme.colors.primary};
 `
 
@@ -57,7 +57,6 @@ export const OrSocialTrace = styled.View`
 `
 
 export const OrSocialText = styled.Text`
-  font-family: ${({ theme }) => theme.fonts.regular};
   font-size: ${({ theme }) => theme.fontSizes.medium}px;
   color: ${({ theme }) => theme.colors.primary};
   text-align: center;
@@ -77,13 +76,11 @@ export const ButtonRegister = styled.TouchableOpacity`
 `
 
 export const ButtonRegisterText = styled.Text`
-  font-family: ${({ theme }) => theme.fonts.regular};
   font-size: ${({ theme }) => theme.fontSizes.medium}px;
   color: #000;
 `
 
 export const ButtonRegisterTextGrif = styled.Text`
-  font-family: ${({ theme }) => theme.fonts.regular};
   font-size: ${({ theme }) => theme.fontSizes.medium}px;
   color: ${({ theme }) => theme.colors.primary};
   text-decoration-line: underline;
@@ -99,8 +96,7 @@ export const ContentTermsOfUse = styled.View`
 export const TermsOfUseButton = styled.TouchableOpacity``
 
 export const TermsOfUseText = styled.Text`
-  font-family: ${({ theme }) => theme.fonts.regular};
   font-size: ${({ theme }) => theme.fontSizes.medium}px;
-  color: ${({ theme }) => theme.colors.button_terms_of_use};
+  color: ${({ theme }) => theme.colors.secondary};
   margin-left: ${RFValue(5)}px;
 `

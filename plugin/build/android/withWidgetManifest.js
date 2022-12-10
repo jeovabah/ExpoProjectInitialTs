@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.withWidgetManifest = void 0;
 const config_plugins_1 = require("@expo/config-plugins");
-const withWidgetManifest = config => {
+const withWidgetManifest = (config) => {
     return (0, config_plugins_1.withAndroidManifest)(config, async (newConfig) => {
         const mainApplication = config_plugins_1.AndroidConfig.Manifest.getMainApplicationOrThrow(newConfig.modResults);
         const widgetReceivers = await buildWidgetsReceivers();
@@ -15,25 +15,25 @@ async function buildWidgetsReceivers() {
     return [
         {
             $: {
-                "android:name": ".SampleWidget",
-                "android:exported": "false",
+                'android:name': '.SampleWidget',
+                'android:exported': 'false',
             },
-            "intent-filter": [
+            'intent-filter': [
                 {
                     action: [
                         {
                             $: {
-                                "android:name": "android.appwidget.action.APPWIDGET_UPDATE",
+                                'android:name': 'android.appwidget.action.APPWIDGET_UPDATE',
                             },
                         },
                     ],
                 },
             ],
-            "meta-data": [
+            'meta-data': [
                 {
                     $: {
-                        "android:name": "android.appwidget.provider",
-                        "android:resource": "@xml/sample_widget_info",
+                        'android:name': 'android.appwidget.provider',
+                        'android:resource': '@xml/sample_widget_info',
                     },
                 },
             ],

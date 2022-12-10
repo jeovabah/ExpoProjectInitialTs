@@ -11,6 +11,7 @@ import {
   SignInScreen,
   SignUpScreen,
 } from '~screens'
+import Login from '~screens/Login'
 
 const { Navigator, Screen, Group } = createStackNavigator<RootStackParamList>()
 
@@ -23,7 +24,8 @@ export const RootNavigator: FC = () => {
         <Group key="unauthorized">
           <Screen
             name="SignIn"
-            component={SignInScreen}
+            // component={SignInScreen}
+            component={Login}
             options={{
               title: 'Sign in',
             }}

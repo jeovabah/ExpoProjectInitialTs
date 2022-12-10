@@ -21,13 +21,21 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "jsEngine": "hermes"
+      "jsEngine": "hermes",
+      "config" : {
+        "googleMapsApiKey": "AIzaSyCaRA0bkejuSt3J2ytkUzvtlCDsuHStNlA"
+      }
     },
     "android": {
       "package": "com.tracker",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
+      },
+      "config" : {
+        "googleMaps": {
+          "apiKey": "AIzaSyCaRA0bkejuSt3J2ytkUzvtlCDsuHStNlA"
+        }
       },
       "jsEngine": "hermes"
     },

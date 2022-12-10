@@ -1,47 +1,46 @@
-import { Text, TextInput, View } from 'react-native'
-import { VolumeManager } from 'react-native-volume-manager'
+import { TextInput, View, Text } from 'react-native'
+// import { VolumeManager } from 'react-native-volume-manager'
 
 import { Button } from '~components'
 import { useAuth, useEffect, useState, useTheme } from '~hooks'
 
-export const SignInScreen = (): JSX.Element => {
+export const SignInScreen = (): any => {
   const [countTakeVolume, setCountTakeVolume] = useState(0)
   const [volume, setVolume] = useState(0)
 
-  VolumeManager.showNativeVolumeUI({ enabled: true })
+  // VolumeManager.showNativeVolumeUI({ enabled: true })
 
   // if volume press 3 times
 
-  const handlePress = () => {
-    setCountTakeVolume(countTakeVolume + 1)
-  }
+  // const handlePress = () => {
+  //   setCountTakeVolume(countTakeVolume + 1)
+  // }
 
-  useEffect(() => {
-    VolumeManager.getVolume().then((volume: any) => {
-      setVolume(volume)
-    })
-  }, [volume])
+  // useEffect(() => {
+  //   VolumeManager.getVolume().then((volume: any) => {
+  //     setVolume(volume)
+  //   })
+  // }, [volume])
 
-  useEffect(() => {
-    const volumeListener = VolumeManager.addVolumeListener((result) => {
-      // returns the current volume as a float (0-1)
-      setVolume(result.volume)
-      handlePress()
-      console.log(result.volume)
-      if (countTakeVolume === 3) {
-        console.log('foi pressionado 3 vezes')
-      }
-      if (countTakeVolume === 6) {
-        setCountTakeVolume(0)
+  // useEffect(() => {
+  //   const volumeListener = VolumeManager.addVolumeListener((result) => {
+  //     // returns the current volume as a float (0-1)
+  //     setVolume(result.volume)
+  //     handlePress()
+  //     console.log(result.volume)
+  //     if (countTakeVolume === 3) {
+  //       console.log('foi pressionado 3 vezes')
+  //       setCountTakeVolume(0)
+  //     }
 
-        console.log('foi pressionado 2 vezes')
-      }
-    })
+  //     // on android, the result object will also have the keys
+  //     // music, system, ring, alarm, notification
+  //   })
 
-    return () => {
-      volumeListener.remove()
-    }
-  }, [countTakeVolume])
+  //   return () => {
+  //     volumeListener.remove()
+  //   }
+  // }, [countTakeVolume])
   const { signIn } = useAuth()
   const { s } = useTheme()
   return (
