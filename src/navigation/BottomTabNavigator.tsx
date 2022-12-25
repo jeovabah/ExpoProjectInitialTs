@@ -13,7 +13,7 @@ export const BottomTabNavigator: FC = () => {
   const { tabBarTheme } = useNavigationTheme()
 
   const screenOptions = useCallback(
-    ({ route }): BottomTabNavigationOptions => ({
+    ({ route }: any): BottomTabNavigationOptions => ({
       tabBarIcon: ({ color, size }) => {
         let iconName: keyof typeof Feather.glyphMap
 

@@ -25,14 +25,17 @@ export const Container = styled(MotiView)`
 `
 
 export const ContainerInputs = styled.View`
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin: 5px;
 `
 
 export const ContainerInput = styled.View`
+  width: 20%;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
-  margin-bottom: 35px;
+  align-items: center;
 `
 export const ContainerInputName = styled.View`
   width: 50%;

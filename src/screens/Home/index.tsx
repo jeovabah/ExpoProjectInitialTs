@@ -4,13 +4,15 @@ import { Ionicons } from '@expo/vector-icons'
 import MapView, { PROVIDER_GOOGLE } from 'react-native-maps'
 import { FloatButton } from '~components/FloatButton'
 import { MarkerCar } from '~components/MarkerCar'
-import { ModalAdd } from '~components/ModalAdd'
+import { ModalConfig } from '~components/ModalConfig'
 import { ModalArrastable } from '~components/ModalArrastable'
 import { useCallback, useTranslation, useTheme, useEffect, useState, useRef } from '~hooks'
 import { useLocalProvider } from '~providers/LocalProvider'
 import AppSocket from '~services/socket'
 import theme from '~styles/theme'
 import { Container, ContainerButtonFloat, MyLocation } from './styles'
+import ModalFrame from '~components/ModalFrame'
+import { ModalAdd } from '~components/ModalAdd'
 export const HomeScreen = (props: HomeScreenProps): JSX.Element => {
   const {
     navigation: { navigate },
@@ -35,22 +37,28 @@ export const HomeScreen = (props: HomeScreenProps): JSX.Element => {
       id: 1,
       latitude: -3.731822,
       longitude: -38.521669,
+      idTracker: 'MK1',
       name: 'Car 1',
       image: 'https://i.imgur.com/8Km9tLL.jpg',
+      isActive: true,
     },
     {
       id: 2,
       latitude: -3.731832,
       longitude: -38.522669,
+      idTracker: 'MK2',
       name: 'Car 2',
       image: 'https://i.imgur.com/8Km9tLL.jpg',
+      isActive: true,
     },
     {
       id: 3,
       latitude: -3.731842,
       longitude: -38.524624,
+      idTracker: 'MK3',
       name: 'Car 3',
       image: 'https://i.imgur.com/8Km9tLL.jpg',
+      isActive: true,
     },
   ])
 
@@ -83,7 +91,7 @@ export const HomeScreen = (props: HomeScreenProps): JSX.Element => {
             width: '100%',
           }}
           onPress={() => {
-            setModalAdd(false)
+            setModalConfig(false)
           }}
           region={{
             latitude: location?.coords?.latitude,
@@ -109,10 +117,13 @@ export const HomeScreen = (props: HomeScreenProps): JSX.Element => {
 
       <ContainerButtonFloat>
         <FloatButton
-          onPress={() => setModalAdd(true)}
+          onPress={() => setModalConfig(true)}
           icon={<Ionicons name="settings" size={24} color={theme.colors.secondary} />}
         />
-        <FloatButton icon={<Ionicons name="add" size={24} color={theme.colors.secondary} />} />
+        <FloatButton
+          onPress={() => setModalAdd(true)}
+          icon={<Ionicons name="add" size={24} color={theme.colors.secondary} />}
+        />
         <FloatButton
           icon={<AntDesign name="arrowsalt" size={24} color={theme.colors.secondary} />}
         />
@@ -124,11 +135,17 @@ export const HomeScreen = (props: HomeScreenProps): JSX.Element => {
       </MyLocation>
       {/* pass ref to component ModalArrastable */}
       <ModalArrastable data={carSelected} visible={visible} setVisible={setVisible} />
+      <ModalConfig
+        visible={modalConfig}
+        setData={setFakeDataLocationScoket}
+        setVisible={setModalConfig}
+        data={fakeDataLocationSocket}
+      />
       <ModalAdd
         visible={modalAdd}
-        setData={setFakeDataLocationScoket}
         setVisible={setModalAdd}
         data={fakeDataLocationSocket}
+        setData={setFakeDataLocationScoket}
       />
     </Container>
   )

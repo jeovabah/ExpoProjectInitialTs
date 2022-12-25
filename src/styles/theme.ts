@@ -5,6 +5,7 @@ export default {
     primary: '#00349a',
     secondary: '#000',
     background_global: '#fff',
+    background_black_light: '#00000080',
   },
   toast: {
     secondary_light: '#ff872c4d',
@@ -43,12 +44,12 @@ export default {
     xxxlarge: RFValue(24),
   },
   borderWidth: {
-    small: RFValue(1),
-    medium: RFValue(2),
-    large: RFValue(3),
-    xlarge: RFValue(4),
-    xxlarge: RFValue(5),
-    xxxlarge: RFValue(6),
+    small: RFValue(0.5),
+    medium: RFValue(1),
+    large: RFValue(2),
+    xlarge: RFValue(3),
+    xxlarge: RFValue(4),
+    xxxlarge: RFValue(5),
   },
   spacing: {
     small: RFValue(4),
