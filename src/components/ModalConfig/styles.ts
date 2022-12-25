@@ -78,3 +78,8 @@ export const ContainerList = styled.View`
   border-bottom-width: ${({ theme }) => theme.borderWidth.small}px;
   border-bottom-color: ${({ theme }) => theme.colors.primary};
 `
+
+export const ButtonLocation = styled.TouchableOpacity`
+  height: 15px;
+  width: 15px;
+`

@@ -13,6 +13,7 @@ import theme from '~styles/theme'
 import { Container, ContainerButtonFloat, MyLocation } from './styles'
 import ModalFrame from '~components/ModalFrame'
 import { ModalAdd } from '~components/ModalAdd'
+import { LocationObject } from 'expo-location'
 export const HomeScreen = (props: HomeScreenProps): JSX.Element => {
   const {
     navigation: { navigate },
@@ -71,14 +72,19 @@ export const HomeScreen = (props: HomeScreenProps): JSX.Element => {
     openSocket(1234)
   }, [])
 
-  const handleMyLocation = useCallback(() => {
-    mapRef.current.animateToRegion({
-      latitude: location?.coords?.latitude,
-      longitude: location?.coords?.longitude,
-      latitudeDelta: 0.01422,
-      longitudeDelta: 0.01422,
-    })
-  }, [location, mapRef.current])
+  const handleMyLocation = useCallback(
+    (latitude: number, longitude: number) => {
+      mapRef.current.animateCamera({
+        center: {
+          latitude,
+          longitude,
+        },
+        zoom: 20,
+        heading: 0,
+      })
+    },
+    [mapRef.current]
+  )
 
   return (
     <Container>
@@ -130,7 +136,10 @@ export const HomeScreen = (props: HomeScreenProps): JSX.Element => {
         <FloatButton icon={<Ionicons name="search" size={24} color={theme.colors.secondary} />} />
       </ContainerButtonFloat>
 
-      <MyLocation onPress={handleMyLocation} activeOpacity={0.8}>
+      <MyLocation
+        onPress={() => handleMyLocation(location.coords.latitude, location.coords.longitude)}
+        activeOpacity={0.8}
+      >
         <MaterialIcons name="my-location" size={24} color={theme.colors.secondary} />
       </MyLocation>
       {/* pass ref to component ModalArrastable */}
@@ -140,6 +149,7 @@ export const HomeScreen = (props: HomeScreenProps): JSX.Element => {
         setData={setFakeDataLocationScoket}
         setVisible={setModalConfig}
         data={fakeDataLocationSocket}
+        handleLocation={handleMyLocation}
       />
       <ModalAdd
         visible={modalAdd}

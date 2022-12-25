@@ -7,6 +7,7 @@ import { TextEdit } from '~components/TextEdit'
 import theme from '~styles/theme'
 import {
   ButtonAdd,
+  ButtonLocation,
   Container,
   ContainerInput,
   ContainerInputName,
@@ -21,6 +22,7 @@ interface Props {
   setVisible?: any
   data?: any
   setData?: any
+  handleLocation?: any
 }
 
 interface Car {
@@ -28,7 +30,7 @@ interface Car {
   name: string
   image?: string
 }
-export const ModalConfig = ({ visible, setVisible, data, setData }: Props) => {
+export const ModalConfig = ({ visible, setVisible, data, setData, handleLocation }: Props) => {
   const [car, setCar] = useState<Car>({} as Car)
   const handleAdd = () => {
     setData([
@@ -101,6 +103,14 @@ export const ModalConfig = ({ visible, setVisible, data, setData }: Props) => {
               data={data}
               renderItem={({ item }: any) => (
                 <ContainerList>
+                  <If condition={item?.isActive}>
+                    <Ionicons
+                      name="location"
+                      size={24}
+                      onPress={() => handleLocation(item?.latitude, item?.longitude)}
+                    />
+                  </If>
+
                   <TextEdit>
                     {item?.name} - {item?.idTracker}
                   </TextEdit>
