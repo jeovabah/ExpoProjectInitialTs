@@ -4,6 +4,7 @@ import { Input } from '~components/Input'
 import ModalFrame from '~components/ModalFrame'
 import { TextEdit } from '~components/TextEdit'
 import theme from '~styles/theme'
+import { timeout } from '~utils/timeout'
 import { ButtonAdd, ContainerInput, ContainerInputName, ContainerInputs, InputId } from './styles'
 interface Props {
   data?: any
@@ -19,17 +20,23 @@ interface Car {
 
 export const ModalAdd = ({ visible, setVisible, data, setData }: Props) => {
   const [car, setCar] = useState<Car>({} as Car)
-  const handleAdd = () => {
-    setData([
-      ...data,
-      {
-        id: data.length + 1,
-        name: car.name,
-        idTracker: car.id,
-        image: 'https://i.imgur.com/8Km9tLL.jpg',
-      },
-    ])
+  const [loading, setLoading] = useState(false)
+  const handleAdd = async () => {
+    setLoading(true)
+    await timeout(1000).then(() => {
+      setData([
+        ...data,
+        {
+          id: data.length + 1,
+          name: car.name,
+          idTracker: car.id,
+          image: 'https://i.imgur.com/8Km9tLL.jpg',
+        },
+      ])
+    })
+    setLoading(false)
     setCar({} as Car)
+    setVisible(false)
   }
   return (
     <ModalFrame
@@ -38,6 +45,7 @@ export const ModalAdd = ({ visible, setVisible, data, setData }: Props) => {
       onClose={() => setVisible(false)}
       title="Adicionar Rastreador"
       onPressConfirm={handleAdd}
+      isLoading={loading}
     >
       <ContainerInput>
         <View
