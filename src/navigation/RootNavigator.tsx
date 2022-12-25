@@ -27,7 +27,7 @@ export const RootNavigator: FC = () => {
             // component={SignInScreen}
             component={Login}
             options={{
-              title: 'Sign in',
+              headerShown: false,
             }}
           />
           <Screen name="SignUp" component={SignUpScreen} />

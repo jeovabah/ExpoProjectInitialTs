@@ -30,7 +30,7 @@ export const HomeScreen = (props: HomeScreenProps): JSX.Element => {
     [visible]
   )
 
-  const fakeDataLocationSocket = [
+  const [fakeDataLocationSocket, setFakeDataLocationScoket] = useState([
     {
       id: 1,
       latitude: -3.731822,
@@ -52,42 +52,7 @@ export const HomeScreen = (props: HomeScreenProps): JSX.Element => {
       name: 'Car 3',
       image: 'https://i.imgur.com/8Km9tLL.jpg',
     },
-    {
-      id: 4,
-      latitude: -3.731852,
-      longitude: -38.525624,
-      name: 'Car 4',
-      image: 'https://i.imgur.com/8Km9tLL.jpg',
-    },
-    {
-      id: 5,
-      latitude: -3.731862,
-      longitude: -38.526624,
-      name: 'Car 5',
-      image: 'https://i.imgur.com/8Km9tLL.jpg',
-    },
-    {
-      id: 6,
-      latitude: -3.731872,
-      longitude: -38.527624,
-      name: 'Car 6',
-      image: 'https://i.imgur.com/8Km9tLL.jpg',
-    },
-    {
-      id: 7,
-      latitude: -3.731882,
-      longitude: -38.528624,
-      name: 'Car 7',
-      image: 'https://i.imgur.com/8Km9tLL.jpg',
-    },
-    {
-      id: 8,
-      latitude: -3.731892,
-      longitude: -38.529624,
-      name: 'Car 8',
-      image: 'https://i.imgur.com/8Km9tLL.jpg',
-    },
-  ]
+  ])
 
   useEffect(() => {
     async function openSocket(idTracker: number) {
@@ -159,7 +124,12 @@ export const HomeScreen = (props: HomeScreenProps): JSX.Element => {
       </MyLocation>
       {/* pass ref to component ModalArrastable */}
       <ModalArrastable data={carSelected} visible={visible} setVisible={setVisible} />
-      <ModalAdd visible={modalAdd} data={fakeDataLocationSocket} />
+      <ModalAdd
+        visible={modalAdd}
+        setData={setFakeDataLocationScoket}
+        setVisible={setModalAdd}
+        data={fakeDataLocationSocket}
+      />
     </Container>
   )
 }

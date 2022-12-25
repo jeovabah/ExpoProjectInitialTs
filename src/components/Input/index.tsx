@@ -9,13 +9,5 @@ interface Props {
 }
 
 export const Input = ({ setChange, value, placeholder, m, w }: Props) => {
-  return (
-    <TextInput
-      placeholder={placeholder}
-      value={value}
-      m={m}
-      w={w}
-      onChangeText={(e) => setChange(e)}
-    />
-  )
+  return <TextInput placeholder={placeholder} value={value} m={m} w={w} onChangeText={setChange} />
 }

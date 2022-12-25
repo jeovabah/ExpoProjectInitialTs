@@ -8,12 +8,20 @@ export const Container = styled(MotiView)`
   position: absolute;
   bottom: 0;
   max-height: 400px;
+  min-height: 400px;
   width: 100%;
   border-top-left-radius: ${({ theme }) => theme.spacing.medium}px;
   border-top-right-radius: ${({ theme }) => theme.spacing.medium}px;
   background-color: ${({ theme }) => theme.colors.background_global};
   padding: ${({ theme }) => theme.spacing.medium}px;
   align-items: center;
+
+  elevation: 5;
+
+  shadow-color: #000;
+  shadow-offset: 0px 2px;
+  shadow-opacity: 0.25;
+  shadow-radius: 3.84;
 `
 
 export const ContainerInputs = styled.View`
