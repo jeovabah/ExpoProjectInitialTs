@@ -6,7 +6,7 @@ import { FloatButton } from '~components/FloatButton'
 import { MarkerCar } from '~components/MarkerCar'
 import { ModalConfig } from '~components/ModalConfig'
 import { ModalArrastable } from '~components/ModalArrastable'
-import { useCallback, useEffect, useState, useRef, useAuth } from '~hooks'
+import { useCallback, useEffect, useState, useRef, useAuth, useMemo } from '~hooks'
 import { HOST_IMAGE_CUSTOMER } from '../../config/env.json'
 import { useLocalProvider } from '~providers/LocalProvider'
 import AppSocket from '~services/socket'
@@ -15,6 +15,10 @@ import { Container, ContainerButtonFloat, ContainerProfile, MyLocation } from '.
 import { ModalAdd } from '~components/ModalAdd'
 import { Image } from 'react-native'
 import { RFValue } from 'react-native-responsive-fontsize'
+import { BottomSheetBackdrop, BottomSheetModal } from '@gorhom/bottom-sheet'
+import { TextEdit } from '~components/TextEdit'
+import { ModalSearch } from '~components/ModalSearch'
+import { ModalCar } from '~components/ModalCar'
 export const HomeScreen = (props: HomeScreenProps): JSX.Element => {
   const {
     navigation: { navigate },
@@ -27,13 +31,20 @@ export const HomeScreen = (props: HomeScreenProps): JSX.Element => {
   const [carSelected, setCarSelected] = useState<any>(null)
   const [modalConfig, setModalConfig] = useState<boolean>(false)
   const [modalAdd, setModalAdd] = useState<boolean>(false)
-  const openModal = useCallback(
-    (item: any) => {
-      setVisible(true)
-      setCarSelected(item)
-    },
-    [visible]
-  )
+  const bottomSheetModalRefSearch = useRef<BottomSheetModal>(null)
+  const bottomSheetModalRefCar = useRef<BottomSheetModal>(null)
+  // const openModal = useCallback(
+  //   (item: any) => {
+  //     setVisible(true)
+  //     setCarSelected(item)
+  //   },
+  //   [visible]
+  // )
+
+  const openModalCar = (item: any) => {
+    bottomSheetModalRefCar.current?.present()
+    setCarSelected(item)
+  }
 
   const [fakeDataLocationSocket, setFakeDataLocationScoket] = useState([
     {
@@ -87,6 +98,12 @@ export const HomeScreen = (props: HomeScreenProps): JSX.Element => {
     },
     [mapRef.current]
   )
+
+  // Modal Search
+  const openModalSearch = useCallback(() => {
+    bottomSheetModalRefSearch.current?.present()
+  }, [])
+
   return (
     <Container>
       {location && (
@@ -112,7 +129,7 @@ export const HomeScreen = (props: HomeScreenProps): JSX.Element => {
             fakeDataLocationSocket.map((item) => {
               return (
                 <MarkerCar
-                  onPress={() => openModal(item)}
+                  onPress={() => openModalCar(item)}
                   key={item.id}
                   latitude={item.latitude}
                   longitude={item.longitude}
@@ -134,7 +151,10 @@ export const HomeScreen = (props: HomeScreenProps): JSX.Element => {
         <FloatButton
           icon={<AntDesign name="arrowsalt" size={24} color={theme.colors.secondary} />}
         />
-        <FloatButton icon={<Ionicons name="search" size={24} color={theme.colors.secondary} />} />
+        <FloatButton
+          onPress={() => openModalSearch()}
+          icon={<Ionicons name="search" size={24} color={theme.colors.secondary} />}
+        />
       </ContainerButtonFloat>
 
       <MyLocation
@@ -152,6 +172,8 @@ export const HomeScreen = (props: HomeScreenProps): JSX.Element => {
         data={fakeDataLocationSocket}
         handleLocation={handleMyLocation}
       />
+      <ModalCar refCar={bottomSheetModalRefCar} car={carSelected} />
+      <ModalSearch openModalSearch={openModalSearch} refBottom={bottomSheetModalRefSearch} />
       <ModalAdd
         visible={modalAdd}
         setVisible={setModalAdd}

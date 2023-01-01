@@ -19,6 +19,7 @@ export const AuthProvider = ({ children }: any) => {
       setIsSignedIn(!!token)
       if (storageUser) {
         setUserData(JSON.parse(storageUser)?.data)
+        setHeaders(JSON.parse(storageUser)?.data)
       }
       Push.init().then((token) => {
         setDeviceToken(token || 'dG9rZW5EZWZhdWx0')
