@@ -1,3 +1,4 @@
+import { RFValue } from 'react-native-responsive-fontsize'
 import styled from 'styled-components/native'
 
 export const Container = styled.View`
@@ -8,11 +9,12 @@ export const Container = styled.View`
   height: 100%;
   position: relative;
 `
+
 export const ContainerButtonFloat = styled.View`
   position: absolute;
 
   flex-direction: column;
-  top: 20px;
+  top: ${RFValue(50)}px;
   left: 10px;
 `
 
@@ -26,4 +28,19 @@ export const MyLocation = styled.TouchableOpacity`
   background-color: ${({ theme }) => theme.colors.primary};
   justify-content: center;
   align-items: center;
+`
+
+export const ContainerProfile = styled.TouchableOpacity`
+  position: absolute;
+  top: ${RFValue(50)}px;
+
+  right: 10px;
+  flex-direction: row;
+  align-items: center;
+  elevation: 5;
+
+  shadow-color: #000;
+  shadow-offset: 0px 2px;
+  shadow-opacity: 0.25;
+  shadow-radius: 3.84px;
 `

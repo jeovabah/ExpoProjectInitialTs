@@ -1,16 +1,10 @@
 import { createStackNavigator } from '@react-navigation/stack'
 import { FC } from 'react'
 
-import { BottomTabNavigator } from './BottomTabNavigator'
+import { NavigatorMain } from './NavigatorMain'
 
 import { useAuth } from '~hooks'
-import {
-  ApplicationInfoScreen,
-  NotFoundScreen,
-  SettingsScreen,
-  SignInScreen,
-  SignUpScreen,
-} from '~screens'
+import { ApplicationInfoScreen, NotFoundScreen, SettingsScreen, SignUpScreen } from '~screens'
 import Login from '~screens/Login'
 
 const { Navigator, Screen, Group } = createStackNavigator<RootStackParamList>()
@@ -34,7 +28,7 @@ export const RootNavigator: FC = () => {
         </Group>
       ) : (
         <Group key="authorized">
-          <Screen name="MainTab" component={BottomTabNavigator} options={{ headerShown: false }} />
+          <Screen name="MainTab" component={NavigatorMain} options={{ headerShown: false }} />
           <Screen name="Settings" component={SettingsScreen} />
         </Group>
       )}

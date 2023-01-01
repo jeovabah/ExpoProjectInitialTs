@@ -4,10 +4,25 @@ import { createContext } from 'react'
 export type AuthContextType =
   | {
       isSignedIn: boolean | null
-      signIn: () => void
+      signIn: (email: string, password: string) => void
       signOut: () => void
       signUp: () => void
+      userData: UserDataType
     }
   | undefined
 
-export const AuthContext = createContext<AuthContextType>(undefined)
+export type UserDataType = {
+  api_token: string
+  customerRegisterStatusId: string
+  device_token: string
+  document: string
+  email: string
+  idCustomer: string
+  idUser: string
+  nameUser: string
+  nickname: string
+  phone: string
+  profileImage: string
+  profileImageLink: string
+}
+export const AuthContext = createContext<AuthContextType>({} as AuthContextType)

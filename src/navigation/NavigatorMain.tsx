@@ -6,10 +6,11 @@ import { ExamplesStack } from './ExamplesStack'
 import { HomeStack } from './HomeStack'
 
 import { useCallback, useNavigationTheme } from '~hooks'
+import { createStackNavigator } from '@react-navigation/stack'
 
-const { Navigator, Screen } = createBottomTabNavigator<MainTabParamList>()
+const { Navigator, Screen } = createStackNavigator()
 
-export const BottomTabNavigator: FC = () => {
+export const NavigatorMain: FC = () => {
   const { tabBarTheme } = useNavigationTheme()
 
   const screenOptions = useCallback(
@@ -35,7 +36,11 @@ export const BottomTabNavigator: FC = () => {
   )
 
   return (
-    <Navigator screenOptions={screenOptions}>
+    <Navigator
+      screenOptions={{
+        headerShown: false,
+      }}
+    >
       <Screen name="HomeStack" component={HomeStack} />
       <Screen name="ExamplesStack" component={ExamplesStack} />
     </Navigator>

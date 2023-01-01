@@ -7,6 +7,7 @@ declare global {
   type HomeStackParamList = {
     Home: undefined
     Details: { id: string }
+    Menu: undefined
   }
 
   type ExampleStackParamList = {

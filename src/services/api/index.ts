@@ -1,5 +1,5 @@
 import axios from 'axios'
 
 export const api = axios.create({
-  baseURL: process.env.HOST_API,
+  baseURL: 'https://apiteste.taxireturn.com.br/',
 })

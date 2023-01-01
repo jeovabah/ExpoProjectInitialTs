@@ -46,6 +46,7 @@ export function Input({
             <Content
               icon={icon}
               placeholder={placeholder}
+              placeholderTextColor={theme.colors.background_black_light}
               autoComplete="off"
               onChangeText={onChange}
               secureTextEntry={secureTextEntry}

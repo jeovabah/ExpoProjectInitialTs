@@ -1,24 +1,26 @@
 import { AntDesign, MaterialIcons } from '@expo/vector-icons'
 import { Ionicons } from '@expo/vector-icons'
 
-import MapView, { PROVIDER_GOOGLE } from 'react-native-maps'
+import MapView from 'react-native-maps'
 import { FloatButton } from '~components/FloatButton'
 import { MarkerCar } from '~components/MarkerCar'
 import { ModalConfig } from '~components/ModalConfig'
 import { ModalArrastable } from '~components/ModalArrastable'
-import { useCallback, useTranslation, useTheme, useEffect, useState, useRef } from '~hooks'
+import { useCallback, useEffect, useState, useRef, useAuth } from '~hooks'
+import { HOST_IMAGE_CUSTOMER } from '../../config/env.json'
 import { useLocalProvider } from '~providers/LocalProvider'
 import AppSocket from '~services/socket'
 import theme from '~styles/theme'
-import { Container, ContainerButtonFloat, MyLocation } from './styles'
-import ModalFrame from '~components/ModalFrame'
+import { Container, ContainerButtonFloat, ContainerProfile, MyLocation } from './styles'
 import { ModalAdd } from '~components/ModalAdd'
-import { LocationObject } from 'expo-location'
+import { Image } from 'react-native'
+import { RFValue } from 'react-native-responsive-fontsize'
 export const HomeScreen = (props: HomeScreenProps): JSX.Element => {
   const {
     navigation: { navigate },
   } = props
   const { location } = useLocalProvider()
+  const { userData } = useAuth()
   const mapRef = useRef<any>(null)
   const socketTracker = useRef<any>(null)
   const [visible, setVisible] = useState(false)
@@ -85,7 +87,6 @@ export const HomeScreen = (props: HomeScreenProps): JSX.Element => {
     },
     [mapRef.current]
   )
-
   return (
     <Container>
       {location && (
@@ -140,7 +141,7 @@ export const HomeScreen = (props: HomeScreenProps): JSX.Element => {
         onPress={() => handleMyLocation(location.coords.latitude, location.coords.longitude)}
         activeOpacity={0.8}
       >
-        <MaterialIcons name="my-location" size={24} color={theme.colors.secondary} />
+        <MaterialIcons name="my-location" size={24} color={theme.colors.background_global} />
       </MyLocation>
       {/* pass ref to component ModalArrastable */}
       <ModalArrastable data={carSelected} visible={visible} setVisible={setVisible} />
@@ -157,6 +158,16 @@ export const HomeScreen = (props: HomeScreenProps): JSX.Element => {
         data={fakeDataLocationSocket}
         setData={setFakeDataLocationScoket}
       />
+      <ContainerProfile activeOpacity={0.8} onPress={() => navigate('Menu')}>
+        <Image
+          source={{ uri: `${HOST_IMAGE_CUSTOMER}${userData?.profileImage}` }}
+          style={{
+            width: RFValue(70),
+            height: RFValue(70),
+            borderRadius: 80,
+          }}
+        />
+      </ContainerProfile>
     </Container>
   )
 }

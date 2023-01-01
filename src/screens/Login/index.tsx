@@ -29,6 +29,8 @@ import { Button } from '~components'
 import { If } from '~components/If'
 import { schema } from './schema'
 import { useAuth } from '~hooks'
+import logoImage from '../../../assets/icon.png'
+import { IfLoaderInsideScreen } from '~components/IfLoaderInsideScreen'
 
 interface FormData {
   email: string
@@ -37,10 +39,17 @@ interface FormData {
 
 export default function Login() {
   const [modalTerms, setModalTerms] = useState(false)
+  const [loading, setLoading] = useState(false)
   const { signIn } = useAuth()
-  const handleAuth = useCallback(() => {
-    signIn()
-  }, [])
+  const handleAuth = useCallback(
+    async (form: FormData) => {
+      setLoading(true)
+      const { email, password } = form
+      await signIn(email, password)
+      setLoading(false)
+    },
+    [signIn]
+  )
   const {
     control,
     handleSubmit,
@@ -57,7 +66,9 @@ export default function Login() {
     <>
       <Container>
         <Content>
-          <ContentImage>{/* <Logo source={logo} /> */}</ContentImage>
+          <ContentImage>
+            <Logo source={logoImage} />
+          </ContentImage>
 
           <InputContainer label={'Insira seu Email'}>
             <Input
@@ -88,7 +99,9 @@ export default function Login() {
           </ContentActions>
 
           <ContentButton>
-            <Button title={'Entrar'} onPress={handleAuth} />
+            <IfLoaderInsideScreen loading={loading}>
+              <Button title={'Entrar'} onPress={handleSubmit(handleAuth)} />
+            </IfLoaderInsideScreen>
           </ContentButton>
 
           <If condition>
