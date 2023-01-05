@@ -7,8 +7,8 @@ export const Container = styled(MotiView)`
   z-index: 1;
   position: absolute;
   bottom: 0;
-  max-height: 400px;
-  min-height: 400px;
+  max-height: 550px;
+  min-height: 550px;
   width: 100%;
   border-top-left-radius: ${({ theme }) => theme.spacing.medium}px;
   border-top-right-radius: ${({ theme }) => theme.spacing.medium}px;
