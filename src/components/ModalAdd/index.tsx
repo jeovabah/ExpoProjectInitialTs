@@ -31,6 +31,8 @@ export const ModalAdd = ({ visible, setVisible, data, setData }: Props) => {
           name: car.name,
           idTracker: car.id,
           image: 'https://i.imgur.com/8Km9tLL.jpg',
+          latitude: data[0]?.latitude + 0.001,
+          longitude: data[0]?.longitude + 0.001,
         },
       ])
     })

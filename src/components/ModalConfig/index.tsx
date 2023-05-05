@@ -40,6 +40,8 @@ export const ModalConfig = ({ visible, setVisible, data, setData, handleLocation
         name: car.name,
         image: 'https://i.imgur.com/8Km9tLL.jpg',
         idTracker: car.id,
+        latitude: data[0]?.latitude + 0.002,
+        longitude: data[0]?.longitude + 0.002,
       },
     ])
     setTimeout(() => {
