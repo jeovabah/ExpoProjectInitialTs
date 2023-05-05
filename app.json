@@ -23,7 +23,7 @@
       "supportsTablet": true,
       "jsEngine": "hermes",
       "config" : {
-        "googleMapsApiKey": "AIzaSyCaRA0bkejuSt3J2ytkUzvtlCDsuHStNlA"
+        "googleMapsApiKey": "AIzaSyAi8KBHM6dO6tpF7apf8B5qnftv_wfpytg"
       }
     },
     "android": {
@@ -34,7 +34,7 @@
       },
       "config" : {
         "googleMaps": {
-          "apiKey": "AIzaSyCaRA0bkejuSt3J2ytkUzvtlCDsuHStNlA"
+          "apiKey": "AIzaSyAi8KBHM6dO6tpF7apf8B5qnftv_wfpytg"
         }
       },
       "jsEngine": "hermes"

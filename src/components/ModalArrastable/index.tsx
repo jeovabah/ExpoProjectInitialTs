@@ -1,6 +1,7 @@
 import { BottomSheetModal, BottomSheetBackdrop } from '@gorhom/bottom-sheet'
 import { useCallback, useEffect, useMemo, useRef } from 'react'
-import { View, Text } from 'react-native'
+import { View, Text, TouchableOpacity } from 'react-native'
+import { Ionicons } from '@expo/vector-icons'
 
 import { Button } from '~components'
 import { useTheme } from '~hooks'
@@ -37,6 +38,10 @@ export const ModalArrastable = ({ visible, setVisible, data }: Props) => {
     openModal()
   }
 
+  const closeModal = useCallback(() => {
+    bottomSheetModalRef?.current?.dismiss()
+  }, [])
+
   return (
     <Container>
       <BottomSheetModal
@@ -46,6 +51,16 @@ export const ModalArrastable = ({ visible, setVisible, data }: Props) => {
         onChange={handleSheetChanges}
         backdropComponent={renderBackdrop}
       >
+        <TouchableOpacity onPress={closeModal}>
+          <View
+            style={{
+              marginLeft: 'auto',
+              paddingRight: 20,
+            }}
+          >
+            <Ionicons name="close" size={30} />
+          </View>
+        </TouchableOpacity>
         <ContainerModal>
           <Text>{data?.name}</Text>
         </ContainerModal>

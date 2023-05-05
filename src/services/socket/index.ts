@@ -1,7 +1,8 @@
 import SocketIOClient from 'socket.io-client'
+import { buildApp } from '~config/constantBuild'
 
 export default class AppSocket {
-  constructor(url = process.env.HOST_SOCKET, options = null) {
+  constructor(url = buildApp().HOST_SOCKET, options = null) {
     this.socket = SocketIOClient(url, options)
   }
 

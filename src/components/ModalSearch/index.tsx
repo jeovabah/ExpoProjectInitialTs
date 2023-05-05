@@ -4,13 +4,16 @@ import { View, Text } from 'react-native'
 import { TextEdit } from '~components/TextEdit'
 
 import { Container, ContainerData, ContainerModal } from './styles'
+import { ModalArrastable } from '~components/ModalArrastable'
 
 interface Props {
   refBottom: any
   openModalSearch: any
+  visible: boolean
+  setVisible?: any
 }
 
-export const ModalSearch = ({ refBottom }: Props) => {
+export const ModalSearch = ({ refBottom, visible, setVisible }: Props) => {
   const snapPoints = useMemo(() => ['25%', '50%'], [])
 
   const handleSheetChanges = useCallback((index: number) => {
@@ -25,18 +28,12 @@ export const ModalSearch = ({ refBottom }: Props) => {
   const bottomSheetModalRef = useRef<BottomSheetModal>(null)
 
   return (
-    <BottomSheetModal
-      ref={(ref) => {
-        refBottom.current = ref
+    <ModalArrastable
+      visible={visible}
+      setVisible={setVisible}
+      data={{
+        name: 'Search de carros',
       }}
-      index={0}
-      snapPoints={snapPoints}
-      onChange={handleSheetChanges}
-      backdropComponent={renderBackdrop}
-    >
-      <ContainerData>
-        <TextEdit>Search</TextEdit>
-      </ContainerData>
-    </BottomSheetModal>
+    />
   )
 }

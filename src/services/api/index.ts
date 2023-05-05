@@ -1,5 +1,6 @@
 import axios from 'axios'
+import { buildApp } from '~config/constantBuild'
 
 export const api = axios.create({
-  baseURL: 'https://apiteste.taxireturn.com.br/',
+  baseURL: buildApp().HOST_API_APP,
 })

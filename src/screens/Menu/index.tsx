@@ -3,9 +3,9 @@ import { Avatar } from 'react-native-elements'
 import { AntDesign } from '@expo/vector-icons'
 import { useTheme } from 'styled-components'
 import { Container, Content } from './styles'
-import { HOST_IMAGE_CUSTOMER } from '../../config/env.json'
 import { useAuth, useNavigation } from '~hooks'
 import ButtonWithIcon from '~components/WithIcon'
+import { buildApp } from '~config/constantBuild'
 
 export default function Menu() {
   const { goBack, navigate } = useNavigation()
@@ -25,7 +25,7 @@ export default function Menu() {
               source={
                 user != null
                   ? {
-                      uri: `${HOST_IMAGE_CUSTOMER}${user.profileImage}`,
+                      uri: `${buildApp().HOST_IMAGE_CUSTOMER}${user.profileImage}`,
                     }
                   : {
                       uri: 'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg',

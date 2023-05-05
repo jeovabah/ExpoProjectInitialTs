@@ -1,14 +1,17 @@
 import { BottomSheetModal, BottomSheetBackdrop } from '@gorhom/bottom-sheet'
 import { useCallback, useMemo } from 'react'
-import { Text } from 'react-native'
+import { Text, TouchableOpacity } from 'react-native'
 import { ContainerData } from './styles'
+import { ModalArrastable } from '~components/ModalArrastable'
 
 interface Props {
   refCar: any
   car: any
+  visible: boolean
+  setVisible?: any
 }
 
-export const ModalCar = ({ refCar, car }: Props) => {
+export const ModalCar = ({ refCar, car, visible, setVisible }: Props) => {
   const snapPoints = useMemo(() => ['25%', '50%'], [])
 
   const handleSheetChanges = useCallback((index: number) => {
@@ -20,19 +23,9 @@ export const ModalCar = ({ refCar, car }: Props) => {
     []
   )
 
-  return (
-    <BottomSheetModal
-      ref={(ref) => {
-        refCar.current = ref
-      }}
-      index={0}
-      snapPoints={snapPoints}
-      onChange={handleSheetChanges}
-      backdropComponent={renderBackdrop}
-    >
-      <ContainerData>
-        <Text>{car?.name}</Text>
-      </ContainerData>
-    </BottomSheetModal>
-  )
+  const closeModal = useCallback(() => {
+    renderBackdrop(false)
+  }, [])
+
+  return <ModalArrastable visible={visible} setVisible={setVisible} data={car} />
 }

@@ -1,6 +1,6 @@
 import { createStackNavigator } from '@react-navigation/stack'
 
-import { DetailsScreen, HomeScreen } from '~screens'
+import { DetailsScreen, HomeScreen, ExamplesScreen } from '~screens'
 import Menu from '~screens/Menu'
 
 const { Navigator, Screen } = createStackNavigator<HomeStackParamList>()

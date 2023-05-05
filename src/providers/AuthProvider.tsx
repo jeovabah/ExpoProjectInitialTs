@@ -39,22 +39,26 @@ export const AuthProvider = ({ children }: any) => {
 
   const signIn = useCallback(
     async (email: string, password: string) => {
-      const { data } = await api.post('Customer/login', {
-        email: email,
-        password: password,
-        deviceToken,
-        generateToken: false,
-      })
+      try {
+        const { data } = await api.post('Customer/login', {
+          email: email,
+          password: password,
+          deviceToken,
+          generateToken: false,
+        })
 
-      if (!data.status) {
-        alert(data.message)
-        return
+        if (!data.status) {
+          alert(data.message)
+          return
+        }
+        setHeaders(data.data)
+        await SecureStore.setItemAsync(TOKEN_KEY, data.data.api_token)
+        await SecureStore.setItemAsync('user', JSON.stringify(data))
+        setUserData(data.data)
+        setIsSignedIn(true)
+      } catch (e: any) {
+        console.log(e?.data)
       }
-      setHeaders(data.data)
-      await SecureStore.setItemAsync(TOKEN_KEY, data.data.api_token)
-      await SecureStore.setItemAsync('user', JSON.stringify(data))
-      setUserData(data.data)
-      setIsSignedIn(true)
     },
     [api, deviceToken]
   )

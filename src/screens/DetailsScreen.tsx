@@ -1,6 +1,6 @@
 import { BottomSheetModal, BottomSheetBackdrop } from '@gorhom/bottom-sheet'
 import { useCallback, useMemo, useRef } from 'react'
-import { View, Text } from 'react-native'
+import { View, Text, TouchableOpacity } from 'react-native'
 
 import { Button } from '~components'
 import { useTheme } from '~hooks'
@@ -21,6 +21,10 @@ export const DetailsScreen = (props: DetailsScreenProps): JSX.Element => {
   const openModal = useCallback(() => {
     bottomSheetModalRef.current?.present()
   }, [])
+  const closeModal = useCallback(() => {
+    console.log('closeModal')
+    bottomSheetModalRef.current?.dismiss()
+  }, [])
 
   const handleSheetChanges = useCallback((index: number) => {
     console.log('handleSheetChanges', index)
@@ -38,11 +42,14 @@ export const DetailsScreen = (props: DetailsScreenProps): JSX.Element => {
       <Text>Screen params {JSON.stringify(params)}</Text>
       <BottomSheetModal
         ref={bottomSheetModalRef}
-        index={0}
+        index={1}
         snapPoints={snapPoints}
         onChange={handleSheetChanges}
         backdropComponent={renderBackdrop}
       >
+        <TouchableOpacity onPress={closeModal} style={[s.p4, s.bgGray100]}>
+          <Text>Close</Text>
+        </TouchableOpacity>
         <View style={[s.p4]}>
           <Text>Awesome 🎉</Text>
         </View>

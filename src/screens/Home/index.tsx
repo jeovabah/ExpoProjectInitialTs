@@ -7,7 +7,6 @@ import { MarkerCar } from '~components/MarkerCar'
 import { ModalConfig } from '~components/ModalConfig'
 import { ModalArrastable } from '~components/ModalArrastable'
 import { useCallback, useEffect, useState, useRef, useAuth, useMemo } from '~hooks'
-import { HOST_IMAGE_CUSTOMER } from '../../config/env.json'
 import { useLocalProvider } from '~providers/LocalProvider'
 import AppSocket from '~services/socket'
 import theme from '~styles/theme'
@@ -19,6 +18,7 @@ import { BottomSheetBackdrop, BottomSheetModal } from '@gorhom/bottom-sheet'
 import { TextEdit } from '~components/TextEdit'
 import { ModalSearch } from '~components/ModalSearch'
 import { ModalCar } from '~components/ModalCar'
+import { buildApp } from '~config/constantBuild'
 export const HomeScreen = (props: HomeScreenProps): JSX.Element => {
   const {
     navigation: { navigate },
@@ -33,6 +33,8 @@ export const HomeScreen = (props: HomeScreenProps): JSX.Element => {
   const [modalAdd, setModalAdd] = useState<boolean>(false)
   const bottomSheetModalRefSearch = useRef<BottomSheetModal>(null)
   const bottomSheetModalRefCar = useRef<BottomSheetModal>(null)
+  const [modalCar, setModalCar] = useState<boolean>(false)
+  const [modalSearch, setModalSearch] = useState<boolean>(false)
   // const openModal = useCallback(
   //   (item: any) => {
   //     setVisible(true)
@@ -43,6 +45,7 @@ export const HomeScreen = (props: HomeScreenProps): JSX.Element => {
 
   const openModalCar = (item: any) => {
     bottomSheetModalRefCar.current?.present()
+    setModalCar(true)
     setCarSelected(item)
   }
 
@@ -102,6 +105,7 @@ export const HomeScreen = (props: HomeScreenProps): JSX.Element => {
   // Modal Search
   const openModalSearch = useCallback(() => {
     bottomSheetModalRefSearch.current?.present()
+    setModalSearch(true)
   }, [])
 
   return (
@@ -172,8 +176,18 @@ export const HomeScreen = (props: HomeScreenProps): JSX.Element => {
         data={fakeDataLocationSocket}
         handleLocation={handleMyLocation}
       />
-      <ModalCar refCar={bottomSheetModalRefCar} car={carSelected} />
-      <ModalSearch openModalSearch={openModalSearch} refBottom={bottomSheetModalRefSearch} />
+      <ModalCar
+        visible={modalCar}
+        setVisible={setModalCar}
+        refCar={bottomSheetModalRefCar}
+        car={carSelected}
+      />
+      <ModalSearch
+        visible={modalSearch}
+        setVisible={setModalSearch}
+        openModalSearch={openModalSearch}
+        refBottom={bottomSheetModalRefSearch}
+      />
       <ModalAdd
         visible={modalAdd}
         setVisible={setModalAdd}
@@ -182,7 +196,7 @@ export const HomeScreen = (props: HomeScreenProps): JSX.Element => {
       />
       <ContainerProfile activeOpacity={0.8} onPress={() => navigate('Menu')}>
         <Image
-          source={{ uri: `${HOST_IMAGE_CUSTOMER}${userData?.profileImage}` }}
+          source={{ uri: `${buildApp().HOST_IMAGE_CUSTOMER}${userData?.profileImage}` }}
           style={{
             width: RFValue(70),
             height: RFValue(70),
