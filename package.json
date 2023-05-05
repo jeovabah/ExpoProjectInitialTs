@@ -15,12 +15,14 @@
   "bugs": {
     "url": "https://github.com/kacgrzes/expo-typescript-template/issues"
   },
-  "author": "Kacper Grzeszczyk",
+  "author": "jeovabah123",
   "license": "MIT",
   "main": "src/index.tsx",
   "scripts": {
     "start": "expo start",
     "start:fast": "EXPO_USE_EXOTIC=1 expo start --clear",
+    "android-build": "eas build -p android --profile=development --clear-cache --local",
+    "android-dev-client": "eas build --profile development --platform android --local",
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
